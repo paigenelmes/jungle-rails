@@ -12,7 +12,7 @@
     <% @lineItems = @order.line_items.each do |line_item| %>
       <%= render 'line_item', quantity: line_item.quantity, product: Product.find(line_item.product_id) %>
     <% end %>
-    <p><strong>Order Total: <%= @order.total_cents / 100.00 %></strong></p>
+    <p><strong>Order Total: <%= humanized_money_with_symbol @order.total_cents / 100.00 %></strong></p>
     <p>Your Email: <%= @order.email %></p>
   </div>
 
