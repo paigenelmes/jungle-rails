@@ -7,8 +7,8 @@
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
     <p>Here are the details of your purchase:</p>
-    <% # Find the line items where their order id matches @order_id %>
-    <% # Loop through each line item and assign key value pairs %>
+    <% # Find the line items in the order %>
+    <% # Loop through each line item and render with key value pairs %>
     <% @lineItems = @order.line_items.each do |line_item| %>
       <%= render 'line_item', quantity: line_item.quantity, product: Product.find(line_item.product_id) %>
     <% end %>
