@@ -119,16 +119,18 @@ form.button_to {
 
 .button-dashboard {
   width: 350px;
-  height: 100px;
+  height: 200px;
   font-size: 1em;
+  padding-top: 1em;
   padding-left: 1em;
   padding-right: 1em;
+  padding-bottom: 1em;
   background-color: rgba(0, 130, 29, 0.7);
   color: white;
   font-weight: 700;
 }
 
 .button-dashboard:hover {
-  background: white;
-  color: rgba(0, 130, 29, 0.7);
+  background: rgb(243,134,146);
+  color: white;
 }

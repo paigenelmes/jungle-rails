@@ -1,7 +1,13 @@
 <header class="page-header">
-<h1>Admin Dashboard</h1>
+  <h1>Admin Dashboard</h1>
 </header>
 <div class="container-dashboard">
-<button class="button-dashboard">Number of Products: <%= @productCount %></button>
-<button class="button-dashboard">Number of Categories: <%= @categoryCount %></button>
+  <button class="button-dashboard">Number of Products: <%= @productCount %><br/>
+    <%=link_to "View All Products", "/admin/products", style: 'color:#FFFFFF;' %>
+  </button>
+  <button class="button-dashboard">Number of Categories: <%= @categoryCount %><br/>
+    <%=link_to "View Evergreens", "/categories/1", style: 'color:#FFFFFF;' %><br/>
+    <%=link_to "View Shrubs", "/categories/2", style: 'color:#FFFFFF;' %><br/>
+    <%=link_to "View Trees", "/categories/3", style: 'color:#FFFFFF;' %>
+  </button>
 </div>
