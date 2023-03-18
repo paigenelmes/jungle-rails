@@ -66,7 +66,7 @@
         </li>
         <% # If logged in, display logout. If not, display login and signup. %>
           <% if current_user %>
-            Signed in as <%= current_user.first_name %> <%= link_to "Logout", '/logout', class: "nav-link" %>
+           <%= link_to "Logout", '/logout', class: "nav-link" %>
           <% else %>
             <%= link_to 'Login', '/login', class: "nav-link" %> <%= link_to 'Signup', '/signup', class: "nav-link" %>
           <% end %>
