@@ -8,8 +8,8 @@ RSpec.describe User, type: :model do
       @user = User.create(first_name: "Mai",
                           last_name: "Hall",
                           email: "mai@stripedtiger.com",
-                          password: "Catn1p",
-                          password_confirmation: "Catn1p")
+                          password: "Catn1pTime",
+                          password_confirmation: "Catn1pTime")
       #Expect this user to be valid & no error
       expect(@user).to be_valid
       expect(@user.errors.full_messages).to_not be_present
@@ -21,8 +21,8 @@ RSpec.describe User, type: :model do
       @user = User.create(first_name: "Mai",
                           last_name: "Hall",
                           email: "mai@stripedtiger.com",
-                          password: "Catn1p!",
-                          password_confirmation: "Catn1p")
+                          password: "Catn1pTime!",
+                          password_confirmation: "Catn1pTime")
      #Expect the user to not be valid with an error
      expect(@user).to_not be_valid
      expect(@user.errors.full_messages).to be_present
@@ -32,8 +32,8 @@ RSpec.describe User, type: :model do
       @user = User.create(first_name: nil,
                           last_name: "Hall",
                           email: "mai@stripedtiger.com",
-                          password: "Catn1p",
-                          password_confirmation: "Catn1p")
+                          password: "Catn1pTime",
+                          password_confirmation: "Catn1pTime")
      #Expect the user to not be valid with an error
      expect(@user).to_not be_valid
      expect(@user.errors.full_messages).to be_present
@@ -44,8 +44,8 @@ RSpec.describe User, type: :model do
       @user = User.create(first_name: "Mai",
                           last_name: nil,
                           email: "mai@stripedtiger.com",
-                          password: "Catn1p",
-                          password_confirmation: "Catn1p")
+                          password: "Catn1pTime",
+                          password_confirmation: "Catn1pTime")
      #Expect the user to not be valid with an error
      expect(@user).to_not be_valid
      expect(@user.errors.full_messages).to be_present
@@ -56,8 +56,8 @@ RSpec.describe User, type: :model do
       @user = User.create(first_name: "Mai",
                           last_name: "Hall",
                           email: nil,
-                          password: "Catn1p",
-                          password_confirmation: "Catn1p")
+                          password: "Catn1pTime",
+                          password_confirmation: "Catn1pTime")
       #Expect the user to not be valid with an error
       expect(@user).to_not be_valid
       expect(@user.errors.full_messages).to be_present
@@ -70,7 +70,7 @@ RSpec.describe User, type: :model do
                           last_name: "Hall",
                           email: "mai@stripedtiger.com",
                           password: nil,
-                          password_confirmation: "Catn1p")
+                          password_confirmation: "Catn1pTime")
       #Expect the user to not be valid with an error
       expect(@user).to_not be_valid
       expect(@user.errors.full_messages).to be_present
@@ -81,7 +81,7 @@ RSpec.describe User, type: :model do
       @user = User.create(first_name: "Mai",
                           last_name: "Hall",
                           email: "mai@stripedtiger.com",
-                          password: "Catn1p",
+                          password: "Catn1pTime",
                           password_confirmation: nil)
       #Expect the user to not be valid with an error
       expect(@user).to_not be_valid
@@ -93,8 +93,8 @@ RSpec.describe User, type: :model do
       @user1 = User.create(first_name: "Mai",
                           last_name: "Hall",
                           email: "mai@stripedtiger.com",
-                          password: "Catn1p",
-                          password_confirmation: "Catn1p")
+                          password: "Catn1pTime",
+                          password_confirmation: "Catn1pTime")
       #Create example user 2 with same email as user 1 but uppercase
       @user2 = User.create(first_name: "David",
       last_name: "Hall",
@@ -105,6 +105,18 @@ RSpec.describe User, type: :model do
       expect(@user1).to be_valid
       expect(@user2).to_not be_valid
       expect(@user2.errors.full_messages).to be_present
+    end
+
+    it "displays an error if the password is too short" do
+      #Create an example user with a password that is less than 8 characters
+      @user = User.create(first_name: "Mai",
+                          last_name: "Hall",
+                          email: "mai@stripedtiger.com",
+                          password: "Catn1p",
+                          password_confirmation: "Catn1p")
+      #Expect the user to not be valid with an error
+      expect(@user).to_not be_valid
+      expect(@user.errors.full_messages).to be_present
     end
   end
 end
