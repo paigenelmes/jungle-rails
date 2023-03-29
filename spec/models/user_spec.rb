@@ -10,8 +10,10 @@ RSpec.describe User, type: :model do
                           email: "mai@stripedtiger.com",
                           password: "Catn1p",
                           password_confirmation: "Catn1p")
-      #Expect this user to be valid
+      #Expect this user to be valid & no error
       expect(@user).to be_valid
+      expect(@user.errors.full_messages).to_not be_present
+
     end
 
     it "displays an error if the password and password confirmation don't match" do
@@ -21,8 +23,9 @@ RSpec.describe User, type: :model do
                           email: "mai@stripedtiger.com",
                           password: "Catn1p!",
                           password_confirmation: "Catn1p")
-      #Expect an error
-      expect(@user.errors.full_messages).to be_present
+     #Expect the user to not be valid with an error
+     expect(@user).to_not be_valid
+     expect(@user.errors.full_messages).to be_present
     end
     it "displays an error if the first name is missing" do
       #Create an example user with no first name
@@ -31,8 +34,9 @@ RSpec.describe User, type: :model do
                           email: "mai@stripedtiger.com",
                           password: "Catn1p",
                           password_confirmation: "Catn1p")
-      #Expect an error
-      expect(@user.errors.full_messages).to be_present
+     #Expect the user to not be valid with an error
+     expect(@user).to_not be_valid
+     expect(@user.errors.full_messages).to be_present
     end
 
     it "displays an error if the last name is missing" do
@@ -42,8 +46,9 @@ RSpec.describe User, type: :model do
                           email: "mai@stripedtiger.com",
                           password: "Catn1p",
                           password_confirmation: "Catn1p")
-      #Expect an error
-      expect(@user.errors.full_messages).to be_present
+     #Expect the user to not be valid with an error
+     expect(@user).to_not be_valid
+     expect(@user.errors.full_messages).to be_present
     end
 
     it "displays an error if the email is missing" do
@@ -53,7 +58,8 @@ RSpec.describe User, type: :model do
                           email: nil,
                           password: "Catn1p",
                           password_confirmation: "Catn1p")
-      #Expect an error
+      #Expect the user to not be valid with an error
+      expect(@user).to_not be_valid
       expect(@user.errors.full_messages).to be_present
     end
 
@@ -65,7 +71,8 @@ RSpec.describe User, type: :model do
                           email: "mai@stripedtiger.com",
                           password: nil,
                           password_confirmation: "Catn1p")
-      #Expect an error
+      #Expect the user to not be valid with an error
+      expect(@user).to_not be_valid
       expect(@user.errors.full_messages).to be_present
     end
 
@@ -76,8 +83,28 @@ RSpec.describe User, type: :model do
                           email: "mai@stripedtiger.com",
                           password: "Catn1p",
                           password_confirmation: nil)
-      #Expect an error
+      #Expect the user to not be valid with an error
+      expect(@user).to_not be_valid
       expect(@user.errors.full_messages).to be_present
+    end
+
+    it "displays an error if the email is already taken, not case sensitive" do
+      #Create example user 1
+      @user1 = User.create(first_name: "Mai",
+                          last_name: "Hall",
+                          email: "mai@stripedtiger.com",
+                          password: "Catn1p",
+                          password_confirmation: "Catn1p")
+      #Create example user 2 with same email as user 1 but uppercase
+      @user2 = User.create(first_name: "David",
+      last_name: "Hall",
+      email: "MAI@STRIPEDTIGER.com",
+      password: "F00Fighters",
+      password_confirmation: "F00Fighters")
+      #Expect user 1 to be valid, expect user 2 to not be valid with an error
+      expect(@user1).to be_valid
+      expect(@user2).to_not be_valid
+      expect(@user2.errors.full_messages).to be_present
     end
   end
 end
