@@ -134,5 +134,27 @@ RSpec.describe User, type: :model do
       #Expect returned user to equal user
       expect(@returnedUser).to eq(@user)
     end
+
+    it "should return a valid user if there is extra white space in email" do
+      #Create an example user
+      @user = User.create(first_name: "Mai",
+                          last_name: "Hall",
+                          email: " mai@stripedtiger.com ",
+                          password: "Catn1pTime",
+                          password_confirmation: "Catn1pTime")
+      #Expect a valid user
+      expect(@user).to be_valid
+    end
+
+    it "should return a valid user if there is are uppercase characters in email" do
+      #Create an example user
+      @user = User.create(first_name: "Mai",
+                          last_name: "Hall",
+                          email: " MAI@StripedTiger.com ",
+                          password: "Catn1pTime",
+                          password_confirmation: "Catn1pTime")
+      #Expect a valid user
+      expect(@user).to be_valid
+    end
   end
 end
