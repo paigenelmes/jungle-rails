@@ -119,4 +119,20 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to be_present
     end
   end
+
+  describe '.authenticate_with_credentials' do
+
+    it "should return a valid user if the user is authenticated" do
+      #Create an example user
+      @user = User.create(first_name: "Mai",
+                          last_name: "Hall",
+                          email: "mai@stripedtiger.com",
+                          password: "Catn1pTime",
+                          password_confirmation: "Catn1pTime")
+      #User authentication method
+      @returnedUser = User.authenticate_with_credentials(@user.email, @user.password)
+      #Expect returned user to equal user
+      expect(@returnedUser).to eq(@user)
+    end
+  end
 end
